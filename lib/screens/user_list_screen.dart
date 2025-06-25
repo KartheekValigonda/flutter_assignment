@@ -59,29 +59,36 @@ class UserListScreen extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(height: 10),
             itemBuilder: (context, index) {
               final user = controller.users[index];
-              return Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                elevation: 2,
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.blueAccent,
-                    child: Text(
-                      user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
-                      style: const TextStyle(color: Colors.white),
+              return SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      elevation: 2,
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blueAccent,
+                          child: Text(
+                            user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        title: Text(
+                          user.name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(user.email),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => Get.to(
+                              () => UserDetailScreen(user: user),
+                          transition: Transition.fade,
+                          duration: const Duration(milliseconds: 300),
+                        ),
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    user.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(user.email),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Get.to(
-                        () => UserDetailScreen(user: user),
-                    transition: Transition.fade,
-                    duration: const Duration(milliseconds: 300),
-                  ),
+                  ],
                 ),
               );
             },

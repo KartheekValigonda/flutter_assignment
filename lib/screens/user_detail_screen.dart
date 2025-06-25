@@ -30,7 +30,7 @@ class UserDetailScreen extends StatelessWidget {
             const SizedBox(height: 20),
             // Details card
             Card(
-              elevation: 3,
+              elevation: 2,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
